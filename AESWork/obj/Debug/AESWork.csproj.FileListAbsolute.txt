@@ -1,0 +1,6 @@
+D:\Book IS\AES\AESWork\AESWork\bin\Debug\AESWork.exe.config
+D:\Book IS\AES\AESWork\AESWork\bin\Debug\AESWork.exe
+D:\Book IS\AES\AESWork\AESWork\bin\Debug\AESWork.pdb
+D:\Book IS\AES\AESWork\AESWork\obj\Debug\AESWork.csprojResolveAssemblyReference.cache
+D:\Book IS\AES\AESWork\AESWork\obj\Debug\AESWork.exe
+D:\Book IS\AES\AESWork\AESWork\obj\Debug\AESWork.pdb
