@@ -10,34 +10,42 @@ namespace AESWork
 {
     class Dencrypt
     {
-        public void Start(string filename_in, string filename_out, string pass, int length)
+        public void Start(string filename_in, string filename_out, string pass,int length)
         {
             CryptoStream cs;
+
             using (FileStream fIn = new FileStream(filename_in, FileMode.Open, FileAccess.Read))
             {
                 using (Aes aesAlg = Aes.Create())
                 {
-                    UnicodeEncoding UE = new UnicodeEncoding();
-                    aesAlg.Key = UE.GetBytes(pass);
-                    aesAlg.IV = UE.GetBytes(pass);
-                   // aesAlg.BlockSize = length;
-                    cs = new CryptoStream(fIn,
-                     aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV),
-                     CryptoStreamMode.Read);
-                    using(FileStream fout = new FileStream(filename_out, FileMode.Create, FileAccess.Write))
+                    //aesAlg.KeySize = length;
+                    byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+                    Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(pass, saltBytes);
+                    if (aesAlg != null)
                     {
-                        
-                        try
+                        aesAlg.KeySize = length;
+                        aesAlg.Key = pdb.GetBytes(aesAlg.KeySize/8);
+                        aesAlg.IV = pdb.GetBytes(16);
+                        cs = new CryptoStream(fIn,
+                            aesAlg.CreateDecryptor(),
+                            CryptoStreamMode.Read);
+                        using (FileStream fout = new FileStream(filename_out, FileMode.Create, FileAccess.Write))
                         {
-                            while (true)
+
+                            try
                             {
-                                fout.WriteByte((byte)cs.ReadByte());
+                                while (true)
+                                {
+                                    fout.WriteByte((byte)cs.ReadByte());
+                                }
+                            }
+                            catch
+                            {
+                                // ignored
                             }
                         }
-                        catch { }
-                        
-
                     }
+                    
                 }
             }
           //  Console.WriteLine(cs);

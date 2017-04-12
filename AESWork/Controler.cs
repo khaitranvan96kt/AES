@@ -31,41 +31,49 @@ namespace AESWork
                     string filename_input = OpenDialog();
                     Console.WriteLine("Nhap password: ");
                     string pass = Console.ReadLine();
-                    Console.WriteLine("Nhap data_length: ");
-                    Console.WriteLine("\t128");
-                    Console.WriteLine("\t192");
-                    Console.WriteLine("\t256");
-                    int length = int.Parse(Console.ReadLine());
-                    if (length != 128 && length != 192 && length != 256)
+                    if (pass != null)
                     {
-                        Console.WriteLine("Gia tri nhap khong duoc chap nhan!");
-                        break;
+                        Console.WriteLine("PassLength: " + pass.Length);
+                        Console.WriteLine("Nhap keySize: ");
+                        Console.WriteLine("\t128");
+                        Console.WriteLine("\t192");
+                        Console.WriteLine("\t256");
+                        int length = int.Parse(Console.ReadLine());
+                        if (length != 128 && length != 192 && length != 256)
+                        {
+                            Console.WriteLine("Gia tri nhap khong duoc chap nhan!");
+                            break;
+                        }
+                        Console.WriteLine("Chon noi luu file da ma hoa");
+                        string filename_output = SaveDialog();
+                        Console.WriteLine("Loading ....");
+                        // t1.Start();
+                        en.Start(filename_input, filename_output, pass, length);
                     }
-                    Console.WriteLine("Chon noi luu file da ma hoa");
-                    string filename_output = SaveDialog();
-                    Console.WriteLine("Loading ....");
-                   // t1.Start();
-                    en.Start(filename_input, filename_output, pass, length);
-                   
+
                     break;
                 case 2:
                     Console.WriteLine("Chon file can giai ma");
                     string filename_inputt = OpenDialog();
                     Console.WriteLine("Nhap password: ");
                     string passs = Console.ReadLine();
-                    Console.WriteLine("Nhap data_length: ");
-                    Console.WriteLine("\t128");
-                    Console.WriteLine("\t192");
-                    Console.WriteLine("\t256");
-                    int lengthh = int.Parse(Console.ReadLine());
-                    if (lengthh != 128 && lengthh != 192 && lengthh != 256)
+                    if (passs != null)
                     {
-                        Console.WriteLine("Gia tri nhap khong duoc chap nhan!");
-                        break;
+                        Console.WriteLine("PassLength: " + passs.Length);
+                        Console.WriteLine("Nhap keySize: ");
+                        Console.WriteLine("\t128");
+                        Console.WriteLine("\t192");
+                        Console.WriteLine("\t256");
+                        int lengthh = int.Parse(Console.ReadLine());
+                        if (lengthh != 128 && lengthh != 192 && lengthh != 256)
+                        {
+                            Console.WriteLine("Gia tri nhap khong duoc chap nhan!");
+                            break;
+                        }
+                        Console.WriteLine("Chon noi luu file giai ma");
+                        string filename_outputt = SaveDialog();
+                        de.Start(filename_inputt, filename_outputt, passs, lengthh);
                     }
-                    Console.WriteLine("Chon noi luu file giai ma");
-                    string filename_outputt = SaveDialog();
-                    de.Start(filename_inputt, filename_outputt, passs, lengthh);
                     break;
                 default:
                     Console.WriteLine("Khong dung chuc nang");
